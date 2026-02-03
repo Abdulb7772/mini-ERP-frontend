@@ -164,7 +164,7 @@ export default function Home() {
 
             {/* Brand Name (Center) */}
             <div className="absolute left-1/2 transform -translate-x-1/2">
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
+              <h1 className="text-2xl font-bold bg-linear-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
                 Mini ERP
               </h1>
             </div>
@@ -297,7 +297,7 @@ export default function Home() {
                 className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300"
               >
                 {/* Product Image */}
-                <div className="h-48 bg-gradient-to-br from-purple-100 to-indigo-100 relative overflow-hidden">
+                <div className="h-48 bg-linear-to-br from-purple-100 to-indigo-100 relative overflow-hidden">
                   {product.imageUrl ? (
                     <img
                       src={product.imageUrl}
@@ -382,7 +382,7 @@ export default function Home() {
                   {/* View Details Button */}
                   <button
                     onClick={handleLogin}
-                    className="w-full px-4 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-medium rounded-lg hover:from-purple-700 hover:to-indigo-700 transition"
+                    className="w-full px-4 py-2 bg-linear-to-r from-purple-600 to-indigo-600 text-white font-medium rounded-lg hover:from-purple-700 hover:to-indigo-700 transition"
                   >
                     Login to Purchase
                   </button>
@@ -419,7 +419,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* Company Info */}
             <div>
-              <h3 className="text-white text-lg font-bold mb-4 bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent">
+              <h3 className="text-lg font-bold mb-4 bg-linear-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent">
                 Mini ERP
               </h3>
               <p className="text-sm text-gray-400 mb-4">

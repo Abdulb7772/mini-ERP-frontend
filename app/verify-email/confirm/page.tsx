@@ -24,7 +24,7 @@ export default function VerifyEmailConfirmPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-600 via-indigo-600 to-violet-500 flex items-center justify-center px-6 py-10">
+    <div className="min-h-screen bg-linear-to-br from-purple-600 via-indigo-600 to-violet-500 flex items-center justify-center px-6 py-10">
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -82,7 +82,7 @@ export default function VerifyEmailConfirmPage() {
           <div className="space-y-3">
             <Link
               href="/login"
-              className="block w-full px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-lg hover:from-purple-700 hover:to-indigo-700 transition font-medium"
+              className="block w-full px-6 py-3 bg-linear-to-r from-purple-600 to-indigo-600 text-white rounded-lg hover:from-purple-700 hover:to-indigo-700 transition font-medium"
             >
               Go to Login
             </Link>

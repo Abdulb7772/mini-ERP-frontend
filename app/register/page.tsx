@@ -193,7 +193,7 @@ export default function RegisterPage() {
               <Button
                 type="submit"
                 loading={loading}
-                className="w-full mt-2 rounded-xl py-3 font-semibold bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 transition"
+                className="w-full mt-2 rounded-xl py-3 font-semibold bg-linear-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 transition"
               >
                 Create Account
               </Button>

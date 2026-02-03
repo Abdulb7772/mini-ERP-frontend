@@ -191,7 +191,7 @@ export default function AttendancePage() {
   return (
     <div className="space-y-6">
       {/* Header with Date */}
-      <div className="bg-gradient-to-r from-purple-600 to-indigo-600 rounded-xl shadow-lg p-6 text-white">
+      <div className="bg-linear-to-r from-purple-600 to-indigo-600 rounded-xl shadow-lg p-6 text-white">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
             <h1 className="text-2xl md:text-3xl font-bold">Attendance Management</h1>
@@ -261,7 +261,7 @@ export default function AttendancePage() {
       <div className="bg-white rounded-xl shadow-lg overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
-            <thead className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white">
+            <thead className="bg-linear-to-r from-purple-600 to-indigo-600 text-white">
               <tr>
                 <th className="px-6 py-4 text-left text-sm font-semibold">Employee</th>
                 <th className="px-6 py-4 text-left text-sm font-semibold">Email</th>
@@ -278,7 +278,7 @@ export default function AttendancePage() {
                     key={record.userId}
                     className={`transition-colors ${
                       record.userId === realUserId
-                        ? "bg-gradient-to-r from-purple-50 to-indigo-50 hover:from-purple-100 hover:to-indigo-100"
+                        ? "bg-linear-to-r from-purple-50 to-indigo-50 hover:from-purple-100 hover:to-indigo-100"
                         : "hover:bg-gray-50"
                     }`}
                   >
@@ -286,8 +286,8 @@ export default function AttendancePage() {
                       <div className="flex items-center">
                         <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm mr-3 ${
                           record.userId === realUserId
-                            ? "bg-gradient-to-br from-purple-600 to-indigo-600 text-white"
-                            : "bg-gradient-to-br from-purple-100 to-indigo-100 text-purple-600"
+                            ? "bg-linear-to-br from-purple-600 to-indigo-600 text-white"
+                            : "bg-linear-to-br from-purple-100 to-indigo-100 text-purple-600"
                         }`}>
                           {record.name.charAt(0).toUpperCase()}
                         </div>
@@ -376,7 +376,7 @@ export default function AttendancePage() {
                     <td className="px-6 py-4">
                       <div className="flex justify-center">
                         {record.totalHours > 0 ? (
-                          <span className="inline-block px-4 py-2 text-sm font-bold rounded-lg bg-gradient-to-r from-purple-100 to-indigo-100 text-purple-700">
+                          <span className="inline-block px-4 py-2 text-sm font-bold rounded-lg bg-linear-to-r from-purple-100 to-indigo-100 text-purple-700">
                             {record.totalHours.toFixed(2)} hrs
                           </span>
                         ) : (

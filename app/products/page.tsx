@@ -248,7 +248,7 @@ export default function PublicProductsPage() {
           <div className="flex justify-between items-center h-16">
             {/* Left side */}
             <div className="flex items-center space-x-4">
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
+              <h1 className="text-2xl font-bold bg-linear-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
                 Mini ERP
               </h1>
               {session?.user && session.user.role !== "customer" && (
@@ -419,7 +419,7 @@ export default function PublicProductsPage() {
                 className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300"
               >
                 {/* Product Image */}
-                <div className="h-48 bg-gradient-to-br from-purple-100 to-indigo-100 relative overflow-hidden">
+                <div className="h-48 bg-linear-to-br from-purple-100 to-indigo-100 relative overflow-hidden">
                   {product.imageUrl ? (
                     <img
                       src={product.imageUrl}
@@ -506,14 +506,14 @@ export default function PublicProductsPage() {
                     <button
                       onClick={() => handleOpenCartModal(product)}
                       disabled={product.stock === 0}
-                      className="w-full px-4 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-medium rounded-lg hover:from-purple-700 hover:to-indigo-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full px-4 py-2 bg-linear-to-r from-purple-600 to-indigo-600 text-white font-medium rounded-lg hover:from-purple-700 hover:to-indigo-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       {product.stock > 0 ? "Place Order" : "Out of Stock"}
                     </button>
                   ) : (
                     <button
                       onClick={handleLogin}
-                      className="w-full px-4 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-medium rounded-lg hover:from-purple-700 hover:to-indigo-700 transition"
+                      className="w-full px-4 py-2 bg-linear-to-r from-purple-600 to-indigo-600 text-white font-medium rounded-lg hover:from-purple-700 hover:to-indigo-700 transition"
                     >
                       Login to Purchase
                     </button>
@@ -576,7 +576,7 @@ export default function PublicProductsPage() {
             {/* Modal Body */}
             <div className="p-6">
               {/* Product Image */}
-              <div className="mb-4 rounded-lg overflow-hidden bg-gradient-to-br from-purple-100 to-indigo-100">
+              <div className="mb-4 rounded-lg overflow-hidden bg-linear-to-br from-purple-100 to-indigo-100">
                 {selectedProduct.imageUrl ? (
                   <img
                     src={selectedProduct.imageUrl}
@@ -671,7 +671,7 @@ export default function PublicProductsPage() {
                 </button>
                 <button
                   onClick={handleAddToCart}
-                  className="flex-1 px-4 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-medium rounded-lg hover:from-purple-700 hover:to-indigo-700 transition"
+                  className="flex-1 px-4 py-3 bg-linear-to-r from-purple-600 to-indigo-600 text-white font-medium rounded-lg hover:from-purple-700 hover:to-indigo-700 transition"
                 >
                   Confirm Order
                 </button>

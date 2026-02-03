@@ -64,9 +64,7 @@ export default function LoginPage() {
         }
       } catch (error) {
         toast.error("An error occurred during login");
-      } finally {
-        setLoading(false);
-      }
+      } 
     },
   });
 

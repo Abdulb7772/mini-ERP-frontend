@@ -49,7 +49,7 @@ export default function VerifyEmailPage() {
   }, [token, router]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-600 via-indigo-600 to-violet-500 flex items-center justify-center px-6 py-10">
+    <div className="min-h-screen bg-linear-to-br from-purple-600 via-indigo-600 to-violet-500 flex items-center justify-center px-6 py-10">
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -96,7 +96,7 @@ export default function VerifyEmailPage() {
               </p>
               <Link
                 href="/login"
-                className="inline-block mt-4 px-6 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-lg hover:from-purple-700 hover:to-indigo-700 transition"
+                className="inline-block mt-4 px-6 py-2 bg-linear-to-r from-purple-600 to-indigo-600 text-white rounded-lg hover:from-purple-700 hover:to-indigo-700 transition"
               >
                 Go to Login
               </Link>
@@ -135,7 +135,7 @@ export default function VerifyEmailPage() {
               <div className="space-y-2">
                 <Link
                   href="/login"
-                  className="block px-6 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-lg hover:from-purple-700 hover:to-indigo-700 transition"
+                  className="block px-6 py-2 bg-linear-to-r from-purple-600 to-indigo-600 text-white rounded-lg hover:from-purple-700 hover:to-indigo-700 transition"
                 >
                   Back to Login
                 </Link>
