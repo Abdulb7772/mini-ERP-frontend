@@ -11,11 +11,16 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     Credentials({
       async authorize(credentials) {
         try {
+          console.log('🔐 Attempting login with:', credentials.email);
+          console.log('🌐 API URL:', `${API_URL}/auth/login`);
+          
           const response = await axios.post(`${API_URL}/auth/login`, {
             email: credentials.email,
             password: credentials.password,
           });
 
+          console.log('✅ Login response:', response.data);
+          
           const { user, token } = response.data.data;
 
           if (user && token) {
@@ -31,7 +36,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           }
           return null;
         } catch (error: any) {
-          console.error("Auth error:", error.response?.data || error.message);
+          console.error("❌ Auth error:", error.response?.data || error.message);
+          console.error("❌ Full error:", error);
           // Throw error with message so NextAuth can display it
           throw new Error(error.response?.data?.message || "Invalid credentials");
         }
