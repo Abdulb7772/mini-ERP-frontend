@@ -45,11 +45,9 @@ function LoginForm() {
         const result = await signIn("credentials", {
           email: values.email,
           password: values.password,
-          callbackUrl: "/protected/dashboard",
+          redirect: false,
         });
 
-        // signIn with callbackUrl will automatically redirect on success
-        // If we reach here, there was an error
         if (result?.error) {
           setLoading(false);
           // Check if error is about email verification
@@ -58,6 +56,9 @@ function LoginForm() {
           } else {
             toast.error(result.error || "Invalid email or password");
           }
+        } else {
+          // Success - redirect to dashboard
+          window.location.href = "/protected/dashboard";
         }
       } catch (error) {
         setLoading(false);
