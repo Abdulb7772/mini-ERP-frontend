@@ -64,11 +64,10 @@ function LoginForm() {
           
           // Redirect based on role
           if (sessionData?.user?.role === "customer") {
-            router.push("/products");
+            window.location.href = "/products";
           } else {
-            router.push("/protected/dashboard");
+            window.location.href = "/protected/dashboard";
           }
-          router.refresh();
         }
       } catch (error) {
         toast.error("An error occurred during login");
