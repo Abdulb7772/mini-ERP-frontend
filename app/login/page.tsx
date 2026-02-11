@@ -45,9 +45,11 @@ function LoginForm() {
         const result = await signIn("credentials", {
           email: values.email,
           password: values.password,
-          redirect: false,
+          callbackUrl: "/protected/dashboard",
         });
 
+        // signIn with callbackUrl will automatically redirect on success
+        // If we reach here, there was an error
         if (result?.error) {
           setLoading(false);
           // Check if error is about email verification
@@ -55,22 +57,6 @@ function LoginForm() {
             toast.error("Please verify your email before logging in. Check your inbox for the verification link.");
           } else {
             toast.error(result.error || "Invalid email or password");
-          }
-        } else if (result?.ok) {
-          toast.success("Login successful! Redirecting...");
-          
-          // Wait a bit for session to be established
-          await new Promise(resolve => setTimeout(resolve, 500));
-          
-          // Get user session to check role
-          const sessionResponse = await fetch('/api/auth/session');
-          const sessionData = await sessionResponse.json();
-          
-          // Redirect based on role
-          if (sessionData?.user?.role === "customer") {
-            window.location.href = "/products";
-          } else {
-            window.location.href = "/protected/dashboard";
           }
         }
       } catch (error) {
