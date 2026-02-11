@@ -49,14 +49,18 @@ function LoginForm() {
         });
 
         if (result?.error) {
+          setLoading(false);
           // Check if error is about email verification
           if (result.error.includes("verify") || result.error.includes("Verify")) {
             toast.error("Please verify your email before logging in. Check your inbox for the verification link.");
           } else {
             toast.error(result.error || "Invalid email or password");
           }
-        } else {
-          toast.success("Login successful!");
+        } else if (result?.ok) {
+          toast.success("Login successful! Redirecting...");
+          
+          // Wait a bit for session to be established
+          await new Promise(resolve => setTimeout(resolve, 500));
           
           // Get user session to check role
           const sessionResponse = await fetch('/api/auth/session');
@@ -70,9 +74,8 @@ function LoginForm() {
           }
         }
       } catch (error) {
-        toast.error("An error occurred during login");
-      } finally {
         setLoading(false);
+        toast.error("An error occurred during login");
       } 
     },
   });
