@@ -3,10 +3,10 @@
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import toast from "react-hot-toast";
 
-export default function VerifyEmailConfirmPage() {
+function VerifyEmailConfirmContent() {
   const searchParams = useSearchParams();
   const email = searchParams.get("email") || "your email";
   const [resending, setResending] = useState(false);
@@ -108,5 +108,22 @@ export default function VerifyEmailConfirmPage() {
         </div>
       </motion.div>
     </div>
+  );
+}
+
+export default function VerifyEmailConfirmPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-linear-to-br from-purple-600 via-indigo-600 to-violet-500 flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-white mx-auto"></div>
+            <p className="text-white mt-4">Loading...</p>
+          </div>
+        </div>
+      }
+    >
+      <VerifyEmailConfirmContent />
+    </Suspense>
   );
 }
