@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -14,7 +14,15 @@ import Button from "@/components/Button";
 
 export default function LoginPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    // Check if user was logged out due to inactivity
+    if (searchParams.get("session") === "expired") {
+      toast.error("You were logged out due to inactivity");
+    }
+  }, [searchParams]);
 
   const validationSchema = Yup.object({
     email: Yup.string()
@@ -64,6 +72,8 @@ export default function LoginPage() {
         }
       } catch (error) {
         toast.error("An error occurred during login");
+      } finally {
+        setLoading(false);
       } 
     },
   });

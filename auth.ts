@@ -20,7 +20,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
           if (user && token) {
             return {
-              id: user._id,
+              id: user.id || user._id,
               name: user.name,
               email: user.email,
               role: user.role,
@@ -30,9 +30,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             };
           }
           return null;
-        } catch (error) {
-          console.error("Auth error:", error);
-          return null;
+        } catch (error: any) {
+          console.error("Auth error:", error.response?.data || error.message);
+          // Throw error with message so NextAuth can display it
+          throw new Error(error.response?.data?.message || "Invalid credentials");
         }
       },
     }),

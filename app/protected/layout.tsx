@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
+import { useInactivityLogout } from "@/hooks/useInactivityLogout";
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
 
@@ -10,6 +11,7 @@ export default function ProtectedLayout({
   children: React.ReactNode;
 }) {
   useAuth();
+  useInactivityLogout();
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   return (
