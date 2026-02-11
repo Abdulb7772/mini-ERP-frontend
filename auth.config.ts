@@ -1,4 +1,5 @@
 import type { NextAuthConfig } from "next-auth";
+import { NextResponse } from "next/server";
 
 export const authConfig = {
   pages: {
@@ -18,16 +19,16 @@ export const authConfig = {
         
         // Block customers from accessing protected routes
         if (userRole === "customer") {
-          return Response.redirect(new URL("/products", nextUrl));
+          return NextResponse.redirect(new URL("/products", nextUrl));
         }
         
         return true;
       } else if (isLoggedIn && (isOnLogin || isOnRegister)) {
         // Redirect based on role after login/register
         if (userRole === "customer") {
-          return Response.redirect(new URL("/products", nextUrl));
+          return NextResponse.redirect(new URL("/products", nextUrl));
         }
-        return Response.redirect(new URL("/protected/dashboard", nextUrl));
+        return NextResponse.redirect(new URL("/protected/dashboard", nextUrl));
       }
       return true;
     },
