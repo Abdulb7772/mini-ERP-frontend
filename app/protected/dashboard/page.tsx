@@ -26,17 +26,31 @@ export default function DashboardPage() {
 
   const fetchDashboardData = async () => {
     try {
+      console.log("🔍 [Dashboard] Starting data fetch...");
+      console.log("🔍 [Dashboard] API URL:", process.env.NEXT_PUBLIC_API_URL);
+      
       setLoading(true);
       setError(null);
-      const [dashboardRes, productsRes] = await Promise.all([
-        dashboardAPI.getStats(),
-        productAPI.getProducts(),
-      ]);
+      
+      console.log("🔍 [Dashboard] Calling dashboardAPI.getStats()...");
+      const dashboardRes = await dashboardAPI.getStats();
+      console.log("✅ [Dashboard] Stats response:", dashboardRes);
+      
+      console.log("🔍 [Dashboard] Calling productAPI.getProducts()...");
+      const productsRes = await productAPI.getProducts();
+      console.log("✅ [Dashboard] Products response:", productsRes);
 
       setStats(dashboardRes.data.data);
       setProducts(productsRes.data.data);
+      
+      console.log("✅ [Dashboard] Data loaded successfully");
+      console.log("📊 [Dashboard] Stats:", dashboardRes.data.data);
+      console.log("📦 [Dashboard] Products count:", productsRes.data.data?.length);
     } catch (error: any) {
-      console.error("Error fetching dashboard data:", error);
+      console.error("❌ [Dashboard] Error fetching dashboard data:", error);
+      console.error("❌ [Dashboard] Error response:", error.response);
+      console.error("❌ [Dashboard] Error message:", error.message);
+      console.error("❌ [Dashboard] Error stack:", error.stack);
       setError(error.response?.data?.message || "Failed to load dashboard data. Please make sure the backend server is running.");
     } finally {
       setLoading(false);
