@@ -24,6 +24,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
     { name: "Reports", href: "/protected/reports", icon: "📋", roles: ["admin", "manager"] },
     { name: "Users", href: "/protected/users", icon: "👥", roles: ["admin", "manager"] },
     { name: "About Us", href: "/protected/about-us", icon: "ℹ️", roles: ["admin"] },
+    { name: "Blogs", href: "/protected/blogs", icon: "📝", roles: ["admin"] },
   ];
 
   const filteredNav = navigation.filter((item) =>
