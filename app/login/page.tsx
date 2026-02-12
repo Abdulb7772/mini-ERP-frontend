@@ -57,8 +57,11 @@ function LoginForm() {
             toast.error(result.error || "Invalid email or password");
           }
         } else {
-          // Success - redirect to dashboard
-          window.location.href = "/protected/dashboard";
+          // Success - show toast and redirect to dashboard
+          toast.success("Login successful!");
+          setTimeout(() => {
+            window.location.href = "/protected/dashboard";
+          }, 1000);
         }
       } catch (error) {
         setLoading(false);
