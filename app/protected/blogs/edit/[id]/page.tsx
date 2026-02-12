@@ -112,7 +112,7 @@ export default function EditBlogPage() {
         />
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-gray-900 mb-2">
             Status <span className="text-red-500">*</span>
           </label>
           <select
@@ -126,7 +126,7 @@ export default function EditBlogPage() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-gray-900 mb-2">
             Description <span className="text-red-500">*</span>
           </label>
           <TiptapEditor
@@ -136,7 +136,7 @@ export default function EditBlogPage() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-gray-900 mb-2">
             Blog Image
           </label>
           <CloudinaryUpload

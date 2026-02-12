@@ -59,8 +59,8 @@ export default function AddBlogPage() {
         <p className="text-gray-600 mt-1">Create a new blog post</p>
       </div>
 
-      <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-md p-6 space-y-6">
-        <Input
+      <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-md p-6 text-black space-y-6">
+        <Input className="text-black"
           label="Title"
           type="text"
           placeholder="Enter blog title"
@@ -69,8 +69,9 @@ export default function AddBlogPage() {
           onChange={(e) => setFormData({ ...formData, title: e.target.value })}
         />
 
-        <Input
-          label="Author"
+        <Input 
+          label ="Author"
+          className="text-black"
           type="text"
           placeholder="Author name"
           required
@@ -79,7 +80,7 @@ export default function AddBlogPage() {
         />
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-gray-900 mb-2">
             Description <span className="text-red-500">*</span>
           </label>
           <TiptapEditor
@@ -89,7 +90,7 @@ export default function AddBlogPage() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-gray-900 mb-2">
             Blog Image
           </label>
           <CloudinaryUpload

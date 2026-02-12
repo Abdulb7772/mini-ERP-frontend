@@ -7,9 +7,9 @@ export default function Input({ label, error, className = "", ...props }: InputP
   return (
     <div className="mb-4">
       {label && (
-        <label className="block text-sm font-medium text-gray-100 mb-1">
+        <label className="block text-sm font-medium text-gray-900 mb-1">
           {label}
-          {props.required && <span className="text-red-700 ml-1">*</span>}
+          {props.required && <span className="text-red-500 ml-1">*</span>}
         </label>
       )}
       <input

@@ -96,19 +96,15 @@ export default function CloudinaryUpload({ onUpload, currentImages = [] }: Cloud
 
   return (
     <div className="space-y-3">
-      <label className="block text-sm font-medium text-white mb-1">
-        Product Images
-      </label>
-      
       {/* Images Grid */}
       {currentImages.length > 0 && (
         <div className="grid grid-cols-4 gap-3 mb-3">
           {currentImages.map((image, index) => (
             <div key={index} className="relative group">
-              <div className="w-full h-32 rounded-lg overflow-hidden bg-white/10 flex items-center justify-center border-2 border-white/30">
+              <div className="w-full h-32 rounded-lg overflow-hidden bg-gray-100 flex items-center justify-center border-2 border-gray-300">
                 <img
                   src={image}
-                  alt={`Product ${index + 1}`}
+                  alt={`Image ${index + 1}`}
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -148,7 +144,7 @@ export default function CloudinaryUpload({ onUpload, currentImages = [] }: Cloud
           type="button"
           onClick={handleClick}
           disabled={uploading}
-          className="px-6 py-2.5 bg-white/20 hover:bg-white/30 text-white rounded-lg transition-colors border border-white/30 flex items-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="px-6 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors border border-gray-300 flex items-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {uploading ? (
             <>
@@ -169,7 +165,7 @@ export default function CloudinaryUpload({ onUpload, currentImages = [] }: Cloud
         </button>
       </div>
       
-      <p className="text-xs text-center text-white/70">
+      <p className="text-xs text-center text-gray-600">
         Supported: JPG, PNG, GIF, WebP • Max 5MB each • First image will be primary
       </p>
     </div>

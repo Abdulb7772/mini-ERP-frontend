@@ -42,16 +42,16 @@ export default function TiptapEditor({ content, onChange, placeholder }: TiptapE
   }
 
   return (
-    <div className="border border-white/30 rounded-md bg-white/10 focus-within:ring-2 focus-within:ring-white/50">
+    <div className="border border-gray-300 rounded-md bg-white focus-within:ring-2 focus-within:ring-purple-500">
       {/* Toolbar */}
-      <div className="flex items-center gap-1 p-2 border-b border-white/20 flex-wrap">
+      <div className="flex items-center gap-1 p-2 border-b border-gray-200 flex-wrap bg-gray-50 rounded-t-md">
         <button
           type="button"
           onClick={() => editor.chain().focus().toggleBold().run()}
           className={`px-2 py-1 rounded text-sm font-semibold transition-colors ${
             editor.isActive('bold')
-              ? 'bg-white/30 text-white'
-              : 'text-white/70 hover:bg-white/20 hover:text-white'
+              ? 'bg-purple-100 text-purple-700'
+              : 'text-gray-700 hover:bg-gray-200 hover:text-gray-900'
           }`}
         >
           B
@@ -61,8 +61,8 @@ export default function TiptapEditor({ content, onChange, placeholder }: TiptapE
           onClick={() => editor.chain().focus().toggleItalic().run()}
           className={`px-2 py-1 rounded text-sm italic transition-colors ${
             editor.isActive('italic')
-              ? 'bg-white/30 text-white'
-              : 'text-white/70 hover:bg-white/20 hover:text-white'
+              ? 'bg-purple-100 text-purple-700'
+              : 'text-gray-700 hover:bg-gray-200 hover:text-gray-900'
           }`}
         >
           I
@@ -72,22 +72,22 @@ export default function TiptapEditor({ content, onChange, placeholder }: TiptapE
           onClick={() => editor.chain().focus().toggleStrike().run()}
           className={`px-2 py-1 rounded text-sm line-through transition-colors ${
             editor.isActive('strike')
-              ? 'bg-white/30 text-white'
-              : 'text-white/70 hover:bg-white/20 hover:text-white'
+              ? 'bg-purple-100 text-purple-700'
+              : 'text-gray-700 hover:bg-gray-200 hover:text-gray-900'
           }`}
         >
           S
         </button>
         
-        <div className="w-px h-6 bg-white/20 mx-1"></div>
+        <div className="w-px h-6 bg-gray-300 mx-1"></div>
         
         <button
           type="button"
           onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
           className={`px-2 py-1 rounded text-sm transition-colors ${
             editor.isActive('heading', { level: 1 })
-              ? 'bg-white/30 text-white'
-              : 'text-white/70 hover:bg-white/20 hover:text-white'
+              ? 'bg-purple-100 text-purple-700'
+              : 'text-gray-700 hover:bg-gray-200 hover:text-gray-900'
           }`}
         >
           H1
@@ -97,8 +97,8 @@ export default function TiptapEditor({ content, onChange, placeholder }: TiptapE
           onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
           className={`px-2 py-1 rounded text-sm transition-colors ${
             editor.isActive('heading', { level: 2 })
-              ? 'bg-white/30 text-white'
-              : 'text-white/70 hover:bg-white/20 hover:text-white'
+              ? 'bg-purple-100 text-purple-700'
+              : 'text-gray-700 hover:bg-gray-200 hover:text-gray-900'
           }`}
         >
           H2
@@ -108,22 +108,22 @@ export default function TiptapEditor({ content, onChange, placeholder }: TiptapE
           onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
           className={`px-2 py-1 rounded text-sm transition-colors ${
             editor.isActive('heading', { level: 3 })
-              ? 'bg-white/30 text-white'
-              : 'text-white/70 hover:bg-white/20 hover:text-white'
+              ? 'bg-purple-100 text-purple-700'
+              : 'text-gray-700 hover:bg-gray-200 hover:text-gray-900'
           }`}
         >
           H3
         </button>
         
-        <div className="w-px h-6 bg-white/20 mx-1"></div>
+        <div className="w-px h-6 bg-gray-300 mx-1"></div>
         
         <button
           type="button"
           onClick={() => editor.chain().focus().toggleBulletList().run()}
           className={`px-2 py-1 rounded text-sm transition-colors ${
             editor.isActive('bulletList')
-              ? 'bg-white/30 text-white'
-              : 'text-white/70 hover:bg-white/20 hover:text-white'
+              ? 'bg-purple-100 text-purple-700'
+              : 'text-gray-700 hover:bg-gray-200 hover:text-gray-900'
           }`}
         >
           • List
@@ -133,22 +133,22 @@ export default function TiptapEditor({ content, onChange, placeholder }: TiptapE
           onClick={() => editor.chain().focus().toggleOrderedList().run()}
           className={`px-2 py-1 rounded text-sm transition-colors ${
             editor.isActive('orderedList')
-              ? 'bg-white/30 text-white'
-              : 'text-white/70 hover:bg-white/20 hover:text-white'
+              ? 'bg-purple-100 text-purple-700'
+              : 'text-gray-700 hover:bg-gray-200 hover:text-gray-900'
           }`}
         >
           1. List
         </button>
         
-        <div className="w-px h-6 bg-white/20 mx-1"></div>
+        <div className="w-px h-6 bg-gray-300 mx-1"></div>
         
         <button
           type="button"
           onClick={() => editor.chain().focus().toggleBlockquote().run()}
           className={`px-2 py-1 rounded text-sm transition-colors ${
             editor.isActive('blockquote')
-              ? 'bg-white/30 text-white'
-              : 'text-white/70 hover:bg-white/20 hover:text-white'
+              ? 'bg-purple-100 text-purple-700'
+              : 'text-gray-700 hover:bg-gray-200 hover:text-gray-900'
           }`}
         >
           " Quote
@@ -157,14 +157,14 @@ export default function TiptapEditor({ content, onChange, placeholder }: TiptapE
         <button
           type="button"
           onClick={() => editor.chain().focus().setHorizontalRule().run()}
-          className="px-2 py-1 rounded text-sm text-white/70 hover:bg-white/20 hover:text-white transition-colors"
+          className="px-2 py-1 rounded text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900 transition-colors"
         >
           ― HR
         </button>
       </div>
 
       {/* Editor Content */}
-      <EditorContent editor={editor} className="text-white" />
+      <EditorContent editor={editor} className="text-gray-900" />
     </div>
   );
 }
