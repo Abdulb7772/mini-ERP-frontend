@@ -65,8 +65,8 @@ export default function RegisterPage() {
 
         toast.success("Registration successful! Please check your email to verify your account.");
         
-        // Redirect to verification confirmation page
-        router.push(`/verify-email/confirm?email=${encodeURIComponent(values.email)}`);
+        // Redirect to verification page
+        router.push(`/verify-email?email=${encodeURIComponent(values.email)}`);
       } catch (error: any) {
         const message = error.response?.data?.message || "Registration failed";
         toast.error(message);
