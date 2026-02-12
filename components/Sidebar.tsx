@@ -23,7 +23,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
     { name: "Attendance", href: "/protected/attendance", icon: "📅", roles: ["admin", "manager", "staff"] },
     { name: "Reports", href: "/protected/reports", icon: "📋", roles: ["admin", "manager"] },
     { name: "Users", href: "/protected/users", icon: "👥", roles: ["admin", "manager"] },
-    { name: "View Products", href: "/products", icon: "🛍️", roles: ["admin", "manager", "staff"] },
+    { name: "About Us", href: "/protected/about-us", icon: "ℹ️", roles: ["admin"] },
   ];
 
   const filteredNav = navigation.filter((item) =>

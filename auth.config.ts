@@ -14,22 +14,19 @@ export const authConfig = {
       const isOnRegister = nextUrl.pathname.startsWith("/register");
       const isOnProducts = nextUrl.pathname === "/products";
 
+      // Allow access to protected routes only for authenticated users
       if (isOnProtected) {
         if (!isLoggedIn) return false; // Redirect unauthenticated users to login page
         
         // Block customers from accessing protected routes
         if (userRole === "customer") {
-          return NextResponse.redirect(new URL("/products", nextUrl));
+          return false; // This will redirect to login page, handle redirect in login page
         }
         
         return true;
-      } else if (isLoggedIn && (isOnLogin || isOnRegister)) {
-        // Redirect based on role after login/register
-        if (userRole === "customer") {
-          return NextResponse.redirect(new URL("/products", nextUrl));
-        }
-        return NextResponse.redirect(new URL("/protected/dashboard", nextUrl));
       }
+      
+      // Allow access to login/register pages and other public pages
       return true;
     },
   },

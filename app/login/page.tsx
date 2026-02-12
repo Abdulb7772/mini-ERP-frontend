@@ -59,9 +59,8 @@ function LoginForm() {
         } else {
           // Success - show toast and redirect to dashboard
           toast.success("Login successful!");
-          setTimeout(() => {
-            window.location.href = "/protected/dashboard";
-          }, 1000);
+          // Use router.push instead of window.location to prevent reload
+          router.push("/protected/dashboard");
         }
       } catch (error) {
         setLoading(false);

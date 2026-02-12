@@ -81,3 +81,11 @@ export const attendanceAPI = {
   getHistory: (params?: any) => 
     axiosInstance.get("/attendance/history", { params }),
 };
+
+// About Us APIs
+export const aboutUsAPI = {
+  get: () => axiosInstance.get("/about-us"),
+  post: (data: any) => axiosInstance.post("/about-us", data),
+  put: (data: any) => axiosInstance.put("/about-us", data),
+  delete: () => axiosInstance.delete("/about-us"),
+};
