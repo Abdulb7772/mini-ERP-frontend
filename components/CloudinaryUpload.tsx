@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, ChangeEvent } from "react";
+import { useRef, ChangeEvent, useState } from "react";
 
 interface CloudinaryUploadProps {
   onUpload: (urls: string[]) => void;
@@ -9,6 +9,34 @@ interface CloudinaryUploadProps {
 
 export default function CloudinaryUpload({ onUpload, currentImages = [] }: CloudinaryUploadProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [uploading, setUploading] = useState(false);
+
+  const uploadToCloudinary = async (file: File): Promise<string | null> => {
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('upload_preset', 'ml_default'); // You can change this to your upload preset
+      formData.append('cloud_name', process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME || 'durjbhqbv');
+
+      const response = await fetch(
+        `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME || 'durjbhqbv'}/image/upload`,
+        {
+          method: 'POST',
+          body: formData,
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error('Upload failed');
+      }
+
+      const data = await response.json();
+      return data.secure_url; // This is the Cloudinary URL
+    } catch (error) {
+      console.error('Cloudinary upload error:', error);
+      return null;
+    }
+  };
 
   const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -17,34 +45,28 @@ export default function CloudinaryUpload({ onUpload, currentImages = [] }: Cloud
     const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
     const maxSize = 5 * 1024 * 1024; // 5MB
     
+    setUploading(true);
+    
     // Process all files
-    const filePromises = Array.from(files).map((file) => {
-      return new Promise<string | null>((resolve) => {
-        // Validate file type
-        if (!validTypes.includes(file.type)) {
-          alert(`${file.name} is not a valid image file`);
-          resolve(null);
-          return;
-        }
+    const filePromises = Array.from(files).map(async (file) => {
+      // Validate file type
+      if (!validTypes.includes(file.type)) {
+        alert(`${file.name} is not a valid image file`);
+        return null;
+      }
 
-        // Validate file size
-        if (file.size > maxSize) {
-          alert(`${file.name} is larger than 5MB`);
-          resolve(null);
-          return;
-        }
+      // Validate file size
+      if (file.size > maxSize) {
+        alert(`${file.name} is larger than 5MB`);
+        return null;
+      }
 
-        // Convert to base64
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          resolve(reader.result as string);
-        };
-        reader.onerror = () => {
-          alert(`Error reading ${file.name}`);
-          resolve(null);
-        };
-        reader.readAsDataURL(file);
-      });
+      // Upload to Cloudinary
+      const url = await uploadToCloudinary(file);
+      if (!url) {
+        alert(`Failed to upload ${file.name}`);
+      }
+      return url;
     });
 
     // Wait for all files to be processed
@@ -54,6 +76,8 @@ export default function CloudinaryUpload({ onUpload, currentImages = [] }: Cloud
     if (validImages.length > 0) {
       onUpload([...currentImages, ...validImages]);
     }
+    
+    setUploading(false);
     
     // Reset input
     if (fileInputRef.current) {
@@ -118,16 +142,30 @@ export default function CloudinaryUpload({ onUpload, currentImages = [] }: Cloud
           onChange={handleFileChange}
           multiple
           className="hidden"
+          disabled={uploading}
         />
         <button
           type="button"
           onClick={handleClick}
-          className="px-6 py-2.5 bg-white/20 hover:bg-white/30 text-white rounded-lg transition-colors border border-white/30 flex items-center space-x-2"
+          disabled={uploading}
+          className="px-6 py-2.5 bg-white/20 hover:bg-white/30 text-white rounded-lg transition-colors border border-white/30 flex items-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-          </svg>
-          <span>{currentImages.length > 0 ? 'Add More Images' : 'Upload Images'}</span>
+          {uploading ? (
+            <>
+              <svg className="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              <span>Uploading...</span>
+            </>
+          ) : (
+            <>
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+              </svg>
+              <span>{currentImages.length > 0 ? 'Add More Images' : 'Upload Images'}</span>
+            </>
+          )}
         </button>
       </div>
       
