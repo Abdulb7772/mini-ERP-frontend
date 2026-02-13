@@ -100,3 +100,14 @@ export const blogAPI = {
   toggleBlogStatus: (id: string) => axiosInstance.patch(`/blogs/${id}/toggle-status`),
   deleteBlog: (id: string) => axiosInstance.delete(`/blogs/${id}`),
 };
+
+// Employee APIs
+export const employeeAPI = {
+  getEmployees: () => axiosInstance.get("/employees"),
+  getActiveEmployees: () => axiosInstance.get("/employees/active"),
+  getEmployee: (id: string) => axiosInstance.get(`/employees/${id}`),
+  createEmployee: (data: any) => axiosInstance.post("/employees", data),
+  updateEmployee: (id: string, data: any) => axiosInstance.put(`/employees/${id}`, data),
+  toggleEmployeeStatus: (id: string) => axiosInstance.patch(`/employees/${id}/toggle-status`),
+  deleteEmployee: (id: string) => axiosInstance.delete(`/employees/${id}`),
+};
