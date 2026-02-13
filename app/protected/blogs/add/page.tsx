@@ -3,14 +3,12 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import axios from "axios";
 import toast from "react-hot-toast";
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 import TiptapEditor from "@/components/TiptapEditor";
 import CloudinaryUpload from "@/components/CloudinaryUpload";
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
+import { blogAPI } from "@/services/apiService";
 
 export default function AddBlogPage() {
   const router = useRouter();
@@ -34,14 +32,7 @@ export default function AddBlogPage() {
     setLoading(true);
 
     try {
-      const token = (session as any)?.accessToken;
-      await axios.post(
-        `${API_URL}/blogs`,
-        formData,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+      await blogAPI.createBlog(formData);
       toast.success("Blog created successfully!");
       router.push("/protected/blogs");
     } catch (error) {

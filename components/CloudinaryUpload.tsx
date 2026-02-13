@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, ChangeEvent, useState } from "react";
+import toast from "react-hot-toast";
 
 interface CloudinaryUploadProps {
   onUpload: (urls: string[]) => void;
@@ -15,11 +16,11 @@ export default function CloudinaryUpload({ onUpload, currentImages = [] }: Cloud
     try {
       const formData = new FormData();
       formData.append('file', file);
-      formData.append('upload_preset', 'ml_default'); // You can change this to your upload preset
-      formData.append('cloud_name', process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME || 'durjbhqbv');
+      formData.append('upload_preset', 'ml_default');
 
+      const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME || 'dpilt8ofa';
       const response = await fetch(
-        `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME || 'durjbhqbv'}/image/upload`,
+        `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
         {
           method: 'POST',
           body: formData,
@@ -27,13 +28,16 @@ export default function CloudinaryUpload({ onUpload, currentImages = [] }: Cloud
       );
 
       if (!response.ok) {
-        throw new Error('Upload failed');
+        const errorData = await response.json();
+        console.error('Cloudinary error response:', errorData);
+        throw new Error(errorData.error?.message || 'Upload failed');
       }
 
       const data = await response.json();
-      return data.secure_url; // This is the Cloudinary URL
-    } catch (error) {
+      return data.secure_url;
+    } catch (error: any) {
       console.error('Cloudinary upload error:', error);
+      toast.error(error.message || 'Failed to upload image');
       return null;
     }
   };
@@ -51,21 +55,18 @@ export default function CloudinaryUpload({ onUpload, currentImages = [] }: Cloud
     const filePromises = Array.from(files).map(async (file) => {
       // Validate file type
       if (!validTypes.includes(file.type)) {
-        alert(`${file.name} is not a valid image file`);
+        toast.error(`${file.name} is not a valid image file`);
         return null;
       }
 
       // Validate file size
       if (file.size > maxSize) {
-        alert(`${file.name} is larger than 5MB`);
+        toast.error(`${file.name} is larger than 5MB`);
         return null;
       }
 
       // Upload to Cloudinary
       const url = await uploadToCloudinary(file);
-      if (!url) {
-        alert(`Failed to upload ${file.name}`);
-      }
       return url;
     });
 
@@ -75,6 +76,7 @@ export default function CloudinaryUpload({ onUpload, currentImages = [] }: Cloud
     
     if (validImages.length > 0) {
       onUpload([...currentImages, ...validImages]);
+      toast.success(`${validImages.length} image(s) uploaded successfully!`);
     }
     
     setUploading(false);

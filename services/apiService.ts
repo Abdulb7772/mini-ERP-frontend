@@ -89,3 +89,14 @@ export const aboutUsAPI = {
   put: (data: any) => axiosInstance.put("/about-us", data),
   delete: () => axiosInstance.delete("/about-us"),
 };
+
+// Blog APIs
+export const blogAPI = {
+  getBlogs: () => axiosInstance.get("/blogs"),
+  getPublishedBlogs: () => axiosInstance.get("/blogs/published"),
+  getBlog: (id: string) => axiosInstance.get(`/blogs/${id}`),
+  createBlog: (data: any) => axiosInstance.post("/blogs", data),
+  updateBlog: (id: string, data: any) => axiosInstance.put(`/blogs/${id}`, data),
+  toggleBlogStatus: (id: string) => axiosInstance.patch(`/blogs/${id}/toggle-status`),
+  deleteBlog: (id: string) => axiosInstance.delete(`/blogs/${id}`),
+};

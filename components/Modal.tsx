@@ -25,8 +25,8 @@ export default function Modal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto">
-      <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+    <div className="fixed inset-0 z-50 overflow-y-auto pt-16">
+      <div className="flex items-start justify-center min-h-screen px-4 pt-8 pb-20 text-center sm:block sm:p-0 sm:pt-8">
         {/* Background overlay */}
         <div
           className="fixed inset-0 backdrop-blur-sm bg-black/30 transition-opacity"
@@ -41,7 +41,7 @@ export default function Modal({
           className={`relative inline-block align-bottom bg-purple-500 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle w-full ${sizeClasses[size]}`}
         >
           {/* Header */}
-          <div className="bg-purple-500 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+          <div className="bg-purple-400 text-gray-900 font-semibold px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-medium leading-6 text-white">
                 {title}

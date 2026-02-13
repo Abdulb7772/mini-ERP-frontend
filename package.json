@@ -15,6 +15,7 @@
     "@tiptap/starter-kit": "^3.16.0",
     "axios": "^1.13.2",
     "chart.js": "^4.5.1",
+    "cloudinary": "^2.9.0",
     "cloudinary-react": "^1.8.1",
     "formik": "^2.4.9",
     "framer-motion": "^12.28.1",

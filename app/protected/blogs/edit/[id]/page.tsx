@@ -3,14 +3,12 @@
 import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { useSession } from "next-auth/react";
-import axios from "axios";
 import toast from "react-hot-toast";
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 import TiptapEditor from "@/components/TiptapEditor";
 import CloudinaryUpload from "@/components/CloudinaryUpload";
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
+import { blogAPI } from "@/services/apiService";
 
 export default function EditBlogPage() {
   const router = useRouter();
@@ -35,10 +33,7 @@ export default function EditBlogPage() {
 
   const fetchBlog = async () => {
     try {
-      const token = (session as any)?.accessToken;
-      const response = await axios.get(`${API_URL}/blogs/${blogId}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const response = await blogAPI.getBlog(blogId);
       setFormData(response.data);
     } catch (error) {
       console.error("Error fetching blog:", error);
@@ -59,14 +54,7 @@ export default function EditBlogPage() {
     setLoading(true);
 
     try {
-      const token = (session as any)?.accessToken;
-      await axios.put(
-        `${API_URL}/blogs/${blogId}`,
-        formData,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+      await blogAPI.updateBlog(blogId, formData);
       toast.success("Blog updated successfully!");
       router.push("/protected/blogs");
     } catch (error) {
@@ -92,7 +80,7 @@ export default function EditBlogPage() {
         <p className="text-gray-600 mt-1">Update blog post details</p>
       </div>
 
-      <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-md p-6 space-y-6">
+      <form onSubmit={handleSubmit} className="bg-white text-black rounded-lg shadow-md p-6 space-y-6">
         <Input
           label="Title"
           type="text"
