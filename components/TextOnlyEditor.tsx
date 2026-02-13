@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import TiptapEditor from "./TiptapEditor";
 import Modal from "./Modal";
 
@@ -211,7 +211,7 @@ export default function TextOnlyEditor({ blocks, onChange }: TextOnlyEditorProps
               </div>
             ) : (
               (() => {
-                const renderedBlocks: JSX.Element[] = [];
+                const renderedBlocks: React.ReactElement[] = [];
                 let i = 0;
                 
                 while (i < blocks.length) {
